@@ -28,7 +28,7 @@ public class ProductManager {
             Statement stmt = con.createStatement();
             rs = stmt.executeQuery("SELECT * FROM employee;");
 
-            while(rs.next()) {
+            while (rs.next()) {
                 System.out.printf("UID = %d%n", rs.getInt("uid"));
                 System.out.printf("Name = %s%n", rs.getString("name"));
             }

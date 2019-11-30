@@ -1,15 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUIController">
   <tabs>
-    <Tab text="Employee Account" />
-    <Tab text="Add Product" />
+    <Tab text="Employee Account">
+         <content>
+            <AnchorPane fx:id="employeeAccountTab" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f6f6f6;">
+               <children>
+                  <Label layoutX="65.0" layoutY="51.0" text="Welcome back, please sign in below." textFill="#4a1792">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="117.0" layoutY="111.0" text="UID:" textFill="#4a1792">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="117.0" layoutY="164.0" text="Password:" textFill="#4a1792">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="signInUID" layoutX="232.0" layoutY="111.0" prefHeight="25.0" prefWidth="269.0" promptText="Enter your UID" />
+                  <TextField fx:id="signInPW" layoutX="233.0" layoutY="164.0" prefHeight="25.0" prefWidth="268.0" promptText="Enter your password" />
+                  <Button fx:id="signInBtn" layoutX="458.0" layoutY="242.0" mnemonicParsing="false" onAction="#handleSignInBtnPressed" text="Sign In" />
+                  <Button fx:id="newAccountBtn" layoutX="80.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleOpenNewAccountPaneBtnPressed" prefHeight="39.0" prefWidth="306.0" style="-fx-background-color: #f6f6f6;" text="New Employee? Click HERE to create a new account" textFill="#4a1792" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <Label layoutX="232.0" layoutY="136.0" text="Hint: UID is first inital of first name followed by last name" textFill="#4a1792">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Label>
+                  <AnchorPane fx:id="newAccountPane" layoutX="1.0" layoutY="3.0" prefHeight="373.0" prefWidth="600.0" style="-fx-background-color: #f6f6f6;" visible="false">
+                     <children>
+                        <Label layoutX="78.0" layoutY="27.0" text="Create New Account" textFill="#4a1792">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="135.0" layoutY="92.0" text="First Name:" textFill="#4a1792">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="135.0" layoutY="136.0" text="Last Name:" textFill="#4a1792">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="135.0" layoutY="180.0" text="Password:" textFill="#4a1792">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="newFirstName" layoutX="267.0" layoutY="92.0" prefHeight="25.0" prefWidth="218.0" promptText="Enter first name" />
+                        <TextField fx:id="newLastName" layoutX="266.0" layoutY="136.0" prefHeight="25.0" prefWidth="219.0" promptText="Enter last name" />
+                        <TextField fx:id="newPassword" layoutX="267.0" layoutY="180.0" prefHeight="25.0" prefWidth="219.0" promptText="Enter password" />
+                        <TextField fx:id="confirmPassword" layoutX="267.0" layoutY="225.0" prefHeight="25.0" prefWidth="219.0" promptText="Confirm password" />
+                        <Button fx:id="createNewAccountBtn" layoutX="374.0" layoutY="301.0" mnemonicParsing="false" onAction="#handleCreateNewAccountBtn" text="Create New Employee Account" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </content></Tab>
+    <Tab text="Add Product">
+         <content>
+            <AnchorPane fx:id="addProductTab" prefHeight="200.0" prefWidth="200.0" />
+         </content></Tab>
       <Tab text="Potential Products">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />

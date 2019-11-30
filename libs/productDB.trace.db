@@ -1,6 +1,0 @@
-2019-09-16 19:50:24 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "EMPLOYEE" not found; SQL statement:
-SELECT * FROM employee; [42102-199]
-2019-09-16 19:50:24 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "EMPLOYEE" not found; SQL statement:
-INSERT INTO employee (uid, name) VALUES (?, ?) [42102-199]

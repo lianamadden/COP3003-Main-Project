@@ -13,8 +13,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class Main extends Application {
-    public Main() throws SQLException {
-    }
+
     //"extends Application" provides functionality for the javafx to work
     //"implements EventHandler<ActionEvent>" allows the program to allow Events
     //<ActionEvent> is the event for a button click
@@ -25,23 +24,23 @@ public class Main extends Application {
         primaryStage.setTitle("Product Inventory");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
-        ProductManager pm = new ProductManager();
-        pm.selectAll();
+        //ProductManager pm = new ProductManager();
+        //pm.selectAll();
 
         // Finally let's insert some data
         // Will use stringBuilder or similar in video to build/map this
         // Main point for both: USE PLACEHOLDERS
-        String insertQuery = "INSERT INTO employee " +
-                "(uid, name)" +
+        /*String insertQuery = "INSERT INTO TEST " +
+                "(ID, name)" +
                 " VALUES (?, ?)";
-        //String[] itemp = {"5854", "New Value"};
-
+        String[] itemp = {"5854", "New Value"};
+*/
         //pm.insertProd(insertQuery, itemp);
-        pm.selectAll();
+        //pm.selectAll();
 
 
         // And close our connection at end
-        pm.closeCon();
+        //pm.closeCon();
     }
 
 

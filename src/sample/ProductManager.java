@@ -8,10 +8,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ProductManager {
-    private Connection con = null;
+    static final String JDBC_DRIVER = "org.h2.Driver";
+    static final String USER = "";
+    static final String PASS = "";
+    private Connection conn = null;
+    private Statement statement;
 
-    public ProductManager() throws SQLException {
-        con = DriverManager.getConnection("jdbc:h2:C:\\Users\\liana\\IdeaProjects\\COP3003-Main-Project1\\libs\\productDB");
+    public ProductManager() throws SQLException {/*
+        conn = DriverManager.getConnection("BIN.PUBLIC.EMPLOYEE");
     }
 
     public void insertProd(String iQuery, String[] insertValues) throws SQLException {
@@ -49,5 +53,6 @@ public class ProductManager {
     public void sqlExceptionHandler(SQLException error) {
         // add logging, could make into a wrapper function
         System.out.println("Standard Failure: " + error.getMessage());
+    }*/
     }
 }

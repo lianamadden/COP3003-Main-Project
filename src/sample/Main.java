@@ -30,12 +30,12 @@ public class Main extends Application {
         // Finally let's insert some data
         // Will use stringBuilder or similar in video to build/map this
         // Main point for both: USE PLACEHOLDERS
-        /*String insertQuery = "INSERT INTO TEST " +
-                "(ID, name)" +
-                " VALUES (?, ?)";
-        String[] itemp = {"5854", "New Value"};
-*/
-        //pm.insertProd(insertQuery, itemp);
+        //String insertQuery = "INSERT INTO EMPLOYEE" +
+          //      "(UID, PASSWORD, FIRST_NAME, LAST_NAME)" +
+            //    " VALUES (?, ?, ?, ?)";
+        //String[] itemp = {"5854", "New Value"};
+
+        //pm.insertIntoUsers("lmadden", "password", "liana", "madden");
         //pm.selectAll();
 
 

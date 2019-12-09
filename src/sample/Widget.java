@@ -1,22 +1,24 @@
 package sample;
 
+import java.sql.SQLException;
+
 public class Widget extends Product{
-    public Widget(String name) {
-        super(name);
+    public Widget(String productName, String manufacturer, String numberOfItems, String type, String creator, String date) throws SQLException {
+        super(productName, manufacturer, numberOfItems, type, creator, date);
     }
 
     @Override
-    public int getId() {
-        return 0;
+    public String getUID() {
+        return null;
     }
 
     @Override
-    public void setName(String parameter) {
+    public void setProductName(String productName) {
 
     }
 
     @Override
-    public String getName() {
+    public String getProductName() {
         return null;
     }
 

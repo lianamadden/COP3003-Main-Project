@@ -1,28 +1,34 @@
 package sample;
 
+import java.sql.SQLException;
+
 public class AudioPlayer extends Product implements MultimediaControl {
 
     private String audioSpecification;
     private String mediaType;
 
-    public AudioPlayer(String name, String mediaType, String audioSpecification) {
-        super(name);
+    public AudioPlayer(String productName, String manufacturer, String numberOfItems, String type, String creator, String date, String mediaType, String audioSpecification) throws SQLException {
+        super(productName, manufacturer, numberOfItems, type, creator, date);
         this.mediaType = mediaType;
     }
 
 
     @Override
-    public int getId() {
-        return 0;
+    public String getUID() {
+        return null;
     }
 
     @Override
-    public void setName(String parameter) {
+    public void setUID(String UID) {
+    }
+
+    @Override
+    public void setProductName(String productName) {
 
     }
 
     @Override
-    public String getName() {
+    public String getProductName() {
         return null;
     }
 

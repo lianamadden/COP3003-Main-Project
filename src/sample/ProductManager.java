@@ -1,6 +1,7 @@
 package sample;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,27 @@ public class ProductManager {
         }
     }//end connectToDB
 
+    public void insertIntoProduct(String val1, String val2, String val3, String val4, String val5, String val6) throws SQLException{
+        connectToDB();
+         String[] insertValues = {val1, val2, val3, val4, val5, val6};
+        try {
+            String insertQuery = "INSERT INTO PRODUCT"
+                    + "(PRODUCT_NAME, MANUFACTURER, PRODUCT_TYPE, NUMBER_OF_ITEMS, CREATOR, CREATE_DATE)" + " VALUES (?, ?, ?, ?, ?, ?);";
+            PreparedStatement pstmt = conn.prepareStatement(insertQuery);
+            pstmt.setString(1, insertValues[0]);
+            pstmt.setString(2, insertValues[1]);
+            pstmt.setString(3, insertValues[2]);
+            pstmt.setString(4, insertValues[3]);
+            pstmt.setString(5, insertValues[4]);
+            pstmt.setString(6,insertValues[5]);
+            pstmt.executeUpdate();
+            conn.commit();
+        } catch (SQLException e) {
+            System.out.println("ERROR: insertIntoProducts Failed!");
+            System.out.println(e);
+
+        }
+    }
     public void insertIntoUsers(String val1, String val2, String val3, String val4) throws SQLException {
         connectToDB();
         if (!selectFromUsersWhereUsernameIs(val1)) {
@@ -122,4 +144,31 @@ public class ProductManager {
         return person;
     }
 
+    public ArrayList<String> pullProductTable() throws SQLException {
+        ArrayList<String> productList = new ArrayList<String>();
+        connectToDB();
+        ResultSet rs = null;
+
+        try {
+            String insertQuery = "SELECT * FROM PRODUCT";
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(insertQuery);
+
+            while(rs.next()) {
+                productList.add(rs.getString("PRODUCT_NAME"));
+                productList.add(rs.getString("MANUFACTURER"));
+                productList.add(rs.getString("PRODUCT_TYPE"));
+                productList.add(rs.getString("NUMBER_OF_ITEMS"));
+                productList.add(rs.getString("CREATOR"));
+                productList.add(rs.getString("CREATE_DATE"));
+            }
+        }
+        catch (Exception e){
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        conn.close();
+        return productList;
     }
+
+}

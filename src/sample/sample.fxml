@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -14,6 +19,38 @@
          <content>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f6f6f6;">
                <children>
+                  <AnchorPane fx:id="employeeAccountTab" layoutX="1.0" layoutY="2.0" prefHeight="371.0" prefWidth="600.0">
+                     <children>
+                        <Label layoutX="73.0" layoutY="79.0" text="Welcome back, please sign in below." textFill="#4a1792">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="137.0" layoutY="131.0" text="UID:" textFill="#4a1792">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="139.0" layoutY="186.0" text="Pin:" textFill="#4a1792">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="signInUID" layoutX="195.0" layoutY="131.0" prefHeight="25.0" prefWidth="269.0" promptText="Enter your UID" />
+                        <TextField fx:id="signInPW" layoutX="196.0" layoutY="186.0" prefHeight="25.0" prefWidth="268.0" promptText="Enter your 4-digit pin" />
+                        <Button fx:id="signInBtn" layoutX="445.0" layoutY="280.0" mnemonicParsing="false" onAction="#handleSignInBtnPressed" text="Sign In" />
+                        <Button fx:id="newAccountBtn" layoutX="73.0" layoutY="241.0" mnemonicParsing="false" onAction="#handleOpenNewAccountPaneBtnPressed" prefHeight="39.0" prefWidth="306.0" style="-fx-background-color: #f6f6f6;" text="New Employee? Click HERE to create a new account" textFill="#4a1792" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Label layoutX="217.0" layoutY="156.0" text="Hint: UID is first inital of first name followed by last name" textFill="#4a1792">
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
                   <AnchorPane fx:id="newAccountPane" layoutX="1.0" layoutY="3.0" prefHeight="373.0" prefWidth="600.0" style="-fx-background-color: #f6f6f6;" visible="false">
                      <children>
                         <Label layoutX="78.0" layoutY="27.0" text="Create New Account" textFill="#4a1792">
@@ -54,7 +91,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="newUIDPane" layoutX="59.0" layoutY="39.0" prefHeight="250.0" prefWidth="462.0" style="-fx-background-color: #f6f6f6;" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="40.0">
+                  <AnchorPane fx:id="newUIDPane" layoutX="59.0" layoutY="39.0" prefHeight="250.0" prefWidth="462.0" style="-fx-background-color: #f6f6f6;" visible="false" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="40.0">
                      <children>
                         <Label layoutX="22.0" layoutY="14.0" text="Account Information" textFill="#4a1972">
                            <font>
@@ -96,39 +133,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Button fx:id="signInAgainBtn" layoutX="91.0" layoutY="257.0" mnemonicParsing="false" onMouseClicked="#handleSignInAgainBtn" prefHeight="25.0" prefWidth="299.0" style="-fx-background-color: #f6f6f6;" text="Not you? Click HERE to sign in again." textFill="#4a1972" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane fx:id="employeeAccountTab" layoutX="1.0" layoutY="2.0" prefHeight="371.0" prefWidth="600.0" visible="false">
-                     <children>
-                        <Label layoutX="73.0" layoutY="79.0" text="Welcome back, please sign in below." textFill="#4a1792">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="137.0" layoutY="131.0" text="UID:" textFill="#4a1792">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="139.0" layoutY="186.0" text="Pin:" textFill="#4a1792">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="signInUID" layoutX="195.0" layoutY="131.0" prefHeight="25.0" prefWidth="269.0" promptText="Enter your UID" />
-                        <TextField fx:id="signInPW" layoutX="196.0" layoutY="186.0" prefHeight="25.0" prefWidth="268.0" promptText="Enter your 4-digit pin" />
-                        <Button fx:id="signInBtn" layoutX="445.0" layoutY="280.0" mnemonicParsing="false" onAction="#handleSignInBtnPressed" text="Sign In" />
-                        <Button fx:id="newAccountBtn" layoutX="73.0" layoutY="241.0" mnemonicParsing="false" onAction="#handleOpenNewAccountPaneBtnPressed" prefHeight="39.0" prefWidth="306.0" style="-fx-background-color: #f6f6f6;" text="New Employee? Click HERE to create a new account" textFill="#4a1792" wrapText="true">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Button>
-                        <Label layoutX="217.0" layoutY="156.0" text="Hint: UID is first inital of first name followed by last name" textFill="#4a1792">
-                           <font>
-                              <Font size="9.0" />
-                           </font>
-                        </Label>
+                        <Button fx:id="signInAgainBtn" layoutX="91.0" layoutY="257.0" mnemonicParsing="false" onAction="#handleSignInAgainBtn" prefHeight="25.0" prefWidth="299.0" style="-fx-background-color: #f6f6f6;" text="Not you? Click HERE to sign in again." textFill="#4a1972" />
                      </children>
                   </AnchorPane>
                </children>
@@ -136,23 +141,135 @@
          </content></Tab>
     <Tab text="Add Product">
          <content>
-            <AnchorPane fx:id="addProductTab" prefHeight="200.0" prefWidth="200.0" />
+            <AnchorPane fx:id="addProductTab" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <AnchorPane fx:id="addProductPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ComboBox fx:id="deviceTypeComboBox" layoutX="256.0" layoutY="78.0" prefHeight="25.0" prefWidth="286.0" promptText="Choose type of device..." />
+                        <Label layoutX="25.0" layoutY="25.0" text="Add Product" textFill="#4a1972">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="nameFillLabel12" layoutX="78.0" layoutY="78.0" text="Device Type:" textFill="#4a1972">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="nameFillLabel121" layoutX="78.0" layoutY="139.0" text="Manufacturer:" textFill="#4a1972">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="nameFillLabel122" layoutX="78.0" layoutY="201.0" text="Product Name:" textFill="#4a1972">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="nameFillLabel123" layoutX="78.0" layoutY="261.0" text="Number of Items:" textFill="#4a1972">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="manufacturerFill" layoutX="255.0" layoutY="139.0" prefHeight="25.0" prefWidth="288.0" promptText="Enter manufacturer's name" />
+                        <TextField fx:id="productNameFill" layoutX="255.0" layoutY="201.0" prefHeight="25.0" prefWidth="288.0" promptText="Enter product name" />
+                        <TextField fx:id="numItemFill" layoutX="255.0" layoutY="261.0" prefHeight="25.0" prefWidth="288.0" promptText="Enter # of items" />
+                        <Button fx:id="addProductBtn" layoutX="220.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleAddProductBtnPressed" text="Add product to inventory" textFill="#4a1972">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="shadowPane" onMouseClicked="#handleShadowPanePressed" opacity="0.2" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <AnchorPane fx:id="confirmationPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f6f6f6;" visible="false" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="75.0">
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Confirmation:" textFill="#4a1972">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="numberNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="147.0" layoutY="59.0" text="100 iphones" textAlignment="CENTER" textFill="#17d544">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="57.0" layoutY="86.0" text="successfully added to inventory on" textAlignment="CENTER" textFill="#17d544">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="dateTimeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="72.0" layoutY="113.0" text="December 8, 2019 at 12:23pm" textAlignment="CENTER" textFill="#17d544">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="byEmployeeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="102.0" layoutY="140.0" text="by employee: lmadden" textAlignment="CENTER" textFill="#17d544">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children></AnchorPane>
          </content></Tab>
-      <Tab text="Potential Products">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-        </content>
-      </Tab>
       <Tab text="Tracking">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="581.0" prefWidth="586.0">
+                           <children>
+                              <TableView fx:id="trackingTable" layoutY="37.0" prefHeight="544.0" prefWidth="586.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0">
+                                <columns>
+                                  <TableColumn fx:id="productNameColumn" prefWidth="124.0" text="Product Name" />
+                                  <TableColumn fx:id="manufacturerColumn" prefWidth="120.79998779296875" text="Manufacturer" />
+                                    <TableColumn fx:id="itemColumn" prefWidth="76.199951171875" text="# of Items" />
+                                    <TableColumn fx:id="typeColumn" prefWidth="48.0" text="Type" />
+                                    <TableColumn fx:id="createdByColumn" prefWidth="94.99993896484375" text="Created by" />
+                                    <TableColumn fx:id="dateColumn" prefWidth="120.0" text="Creation date" />
+                                </columns>
+                              </TableView>
+                              <Label layoutX="14.0" layoutY="10.0" text="Production Records:" textFill="#4a1972">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </ScrollPane>
+               </children></AnchorPane>
         </content>
       </Tab>
       <Tab text="Current Inventory">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="button1" layoutX="268.0" layoutY="173.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Press Me" />
+                  <ScrollPane hbarPolicy="NEVER" prefHeight="373.0" prefWidth="600.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="581.0" prefWidth="586.0">
+                           <children>
+                              <TableView fx:id="trackingTable1" layoutY="37.0" prefHeight="544.0" prefWidth="586.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0">
+                                 <columns>
+                                    <TableColumn fx:id="productNameColumn1" prefWidth="188.4000244140625" text="Product Name" />
+                                    <TableColumn fx:id="manufacturerColumn1" prefWidth="205.20001220703125" text="Manufacturer" />
+                                    <TableColumn fx:id="itemColumn1" prefWidth="192.79998779296875" text="# of Items" />
+                                 </columns>
+                              </TableView>
+                              <Label layoutX="14.0" layoutY="10.0" text="Production Records:" textFill="#4a1972">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
                </children>
             </AnchorPane>
         </content>

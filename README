@@ -1,4 +1,4 @@
-# Prodction-Project
+## Production-Project
 This program allows an employee to create an account and log in. The employee can add products to the inventory which will be added to
 the database and will then be uploaded to the tracking records. The employee is able to view the tracking of all of the products that
 have been added and can also see the current amount of items of each product.

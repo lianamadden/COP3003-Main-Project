@@ -79,12 +79,7 @@
                         <TextField fx:id="confirmPassword" layoutX="266.0" layoutY="266.0" prefHeight="25.0" prefWidth="219.0" promptText="Confirm pin" />
                         <Button fx:id="createNewAccountBtn" layoutX="376.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleCreateNewAccountBtn" text="Create New Employee Account" />
                         <Label fx:id="errorCodeBottom" layoutX="135.0" layoutY="299.0" prefHeight="17.0" prefWidth="360.0" />
-                        <Label fx:id="userNameIsLabel" layoutX="135.0" layoutY="187.0" prefHeight="17.0" prefWidth="151.0" text="Your username is:" textFill="#4a1972">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="concatUIDLabel" layoutX="271.0" layoutY="187.0" prefHeight="17.0" prefWidth="89.0" text="username" textFill="#4a1972">
+                        <Label fx:id="concatUIDLabel" layoutX="251.0" layoutY="174.0" prefHeight="25.0" prefWidth="258.0" textFill="#4a1972">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -98,7 +93,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="firstNameLabel" layoutX="171.0" layoutY="82.0" text="Name!" textFill="#4a1972">
+                        <Label fx:id="firstNameLabel" layoutX="241.0" layoutY="82.0" text="First Name" textFill="#4a1972">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -118,22 +113,27 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lastNameLabel" layoutX="171.0" layoutY="122.0" text="Name!" textFill="#4a1972">
+                        <Label fx:id="lastNameLabel" layoutX="241.0" layoutY="122.0" text="Last Name" textFill="#4a1972">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="nameFillLabel111" layoutX="62.0" layoutY="161.0" text="Username:" textFill="#4a1972">
+                        <Label fx:id="nameFillLabel111" layoutX="62.0" layoutY="161.0" text="Your username is: " textFill="#4a1972">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="usernameLabel" layoutX="171.0" layoutY="161.0" text="Name!" textFill="#4a1972">
+                        <Label fx:id="usernameLabel" layoutX="241.0" layoutY="161.0" text="Username" textFill="#4a1972">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
                         <Button fx:id="signInAgainBtn" layoutX="91.0" layoutY="257.0" mnemonicParsing="false" onAction="#handleSignInAgainBtn" prefHeight="25.0" prefWidth="299.0" style="-fx-background-color: #f6f6f6;" text="Not you? Click HERE to sign in again." textFill="#4a1972" />
+                        <Label layoutX="64.0" layoutY="216.0" text="You can now add products to the records." textFill="#4a1972">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </children>

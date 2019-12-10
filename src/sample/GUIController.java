@@ -121,15 +121,9 @@ public class GUIController {
     private ProductManager SignUpController = new ProductManager();
     private ProductManager SignInController = new ProductManager();
     private ProductManager ProductController = new ProductManager();
+    private ProductManager CreateNewAccount = new ProductManager();
 
 
-
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        // Button was clicked, do something...
-        System.out.println("You pressed the button!");
-
-    }
 
     @FXML
     private void handleOpenNewAccountPaneBtnPressed(ActionEvent event) {
@@ -140,7 +134,7 @@ public class GUIController {
     }
 
     @FXML
-    private void handleSignInAgainBtn (ActionEvent event) {
+    private void handleSignInAgainBtn(ActionEvent event) {
         employeeAccountTab.setVisible(true);
         newUIDPane.setVisible(false);
         newAccountPane.setVisible(false);
@@ -149,7 +143,7 @@ public class GUIController {
     }
 
     @FXML
-    private void handleAddProductBtnPressed (ActionEvent event) throws SQLException {
+    private void handleAddProductBtnPressed(ActionEvent event) throws SQLException {
         String type = deviceTypeComboBox.getValue().toString();
         String manufacturer = manufacturerFill.getText();
         String productName = productNameFill.getText();
@@ -161,7 +155,7 @@ public class GUIController {
         String date = now.toString();
         ProductController.insertIntoProduct(productName, manufacturer, type, numberOfItems, creator, date);
         //ArrayList<String> productList = ProductController.pullProductTable(productName, manufacturer, type, numberOfItems, creator);
-
+        initialize();
         numberNameLabel.setText(numberOfItems + " " + productName + "s");
         dateTimeLabel.setText(date);
         byEmployeeLabel.setText("by employee: " + creator);
@@ -174,10 +168,11 @@ public class GUIController {
     }
 
     @FXML
-    private void handleShadowPanePressed () {
+    private void handleShadowPanePressed() {
         confirmationPane.setVisible(false);
         shadowPane.setVisible(false);
     }
+
     @FXML
     private void handleCreateNewAccountBtn(ActionEvent event) throws SQLException {
         //Create new employee button pressed and account is created in Database
@@ -185,20 +180,29 @@ public class GUIController {
         lastName = newLastName.getText();
         UID = (firstName.charAt(0) + lastName).toLowerCase();
         password = newPassword.getText();
-        Boolean UIDStatus = true;
-        Boolean PasswordStatus = true;
-        /*This portion will also be used to check if user already exists.
-         * based on this result as well as username and password status
-         * we will create a new user or reject and prompt the User*/
-            if (UIDStatus && PasswordStatus) { // If Username is UNIQUE, then add user to DataBase
-                SignUpController.insertIntoUsers(UID, password, firstName, lastName);
-                System.out.println("[remove this later] NEW USER CREATED!");
-                newAccountPane.setVisible(false);
-                employeeAccountTab.setVisible(true);
-            } else { // If Username is not UNIQUE, then reject user Creation
-                errorCodeBottom.setTextFill(Paint.valueOf("#cc0000")); // Red
-                errorCodeBottom.setText("Unable to Create New User.");
-            }
+        Boolean UIDStatus = checkUIDAvailability(UID);
+        Boolean PasswordStatus = checkPasswordLength();
+
+        if (UIDStatus) {
+            concatUIDLabel.setText("Your username is: " + UID);
+        } else {
+            int i = 1;
+            UID = UID + i++;
+            System.out.println("Checking 1" + UID);
+            checkUIDAvailability(UID);
+            concatUIDLabel.setText("Your username is: " + UID);
+        }
+
+        if (UIDStatus && PasswordStatus) { // If Username is UNIQUE, then add user to DataBase
+            System.out.println(UID);
+            SignUpController.insertIntoUsers(UID, password, firstName, lastName);
+            System.out.println("[remove this later] NEW USER CREATED!");
+            newAccountPane.setVisible(false);
+            employeeAccountTab.setVisible(true);
+        } else { // If Username is not UNIQUE, then reject user Creation
+            errorCodeBottom.setTextFill(Paint.valueOf("#cc0000")); // Red
+            errorCodeBottom.setText("Unable to Create New User.");
+        }
     }
 
     @FXML
@@ -219,16 +223,16 @@ public class GUIController {
         boolean isGoodPassword = false;
         String PasswordField1Entry = newPassword.getText();
         String PasswordField2Entry = confirmPassword.getText();
-        if ((newPassword.getText().trim()).length() < 6
-                && (confirmPassword.getText().trim()).length() < 6) { // Both Fields < 6
+        if ((newPassword.getText().trim()).length() < 4
+                && (confirmPassword.getText().trim()).length() < 4) { // Both Fields < 6
             errorCodeBottom.setTextFill(Paint.valueOf("#cc0000")); // Red
             errorCodeBottom.setText("Both Password Fields Too Short.");
-        } else if (((newPassword.getText().trim()).length() >= 6
-                && (confirmPassword.getText().trim()).length() < 6)) { // Field 2 < 6
+        } else if (((newPassword.getText().trim()).length() >= 4
+                && (confirmPassword.getText().trim()).length() < 4)) { // Field 2 < 6
             errorCodeBottom.setTextFill(Paint.valueOf("#cc0000")); // Red
             errorCodeBottom.setText("Second Password Field Too Short.");
-        } else if (((newPassword.getText().trim()).length() < 6
-                && (confirmPassword.getText().trim()).length() >= 6)) { // Field 1 < 6
+        } else if (((newPassword.getText().trim()).length() < 4
+                && (confirmPassword.getText().trim()).length() >= 4)) { // Field 1 < 6
             errorCodeBottom.setTextFill(Paint.valueOf("#cc0000")); // Red
             errorCodeBottom.setText("First Password Field Too Short.");
         } else { // Both correct Length
@@ -244,11 +248,14 @@ public class GUIController {
         return isGoodPassword;
     } // end checkPasswordLength
 
-    public boolean checkUIDAvailability() {
+    public boolean checkUIDAvailability(String UID) {
         boolean isGoodUID = true;
-
+        System.out.println(UID);
+        isGoodUID = !(CreateNewAccount.selectFromUsersWhereUsernameIs(UID));
+        System.out.println(isGoodUID);
         return isGoodUID;
     }
+
 
     @FXML
     public void initialize() throws SQLException {
@@ -260,10 +267,43 @@ public class GUIController {
     }
 
     @FXML
-    public void fillTableViewInventory() {
+    public void fillTableViewInventory() throws SQLException {
         productNameColumn1.setCellValueFactory(new PropertyValueFactory<Product, String>("productName"));
         manufacturerColumn1.setCellValueFactory(new PropertyValueFactory<Product, String>("manufacturer"));
         itemColumn1.setCellValueFactory(new PropertyValueFactory<Product, String>("numberOfItems"));
+
+        ArrayList<String> inventory = ProductController.pullProductTable();
+        System.out.println(inventory);
+
+        ObservableList<Product> productInventory = FXCollections.observableArrayList();
+
+        for (int i = 0; i <= inventory.size()- 1;i++) {
+            if (!(inventory.get(i).equals("null"))) {
+
+                //product name
+                String arg1 = inventory.get(i);
+                i++;
+                //manufacturer
+                String arg2 = inventory.get(i);
+                i++;
+                //item type
+                String arg3 = inventory.get(i);
+                i++;
+                //item number
+                String arg4 = inventory.get(i);
+                i++;
+                //username
+                String arg5 = inventory.get(i);
+                i++;
+                //date
+                String arg6 = inventory.get(i);
+
+                productInventory.addAll(FXCollections.observableArrayList(
+                        new Product(arg1, arg2, arg4, arg3, arg5, arg6)));
+            }
+            trackingTable1.setItems(productInventory);
+        }
+
     }
 
     @FXML
@@ -278,44 +318,66 @@ public class GUIController {
 
         ArrayList<String> product = ProductController.pullProductTable();
 
+        ArrayList<String> productName = new ArrayList<String>();
+        for (int j = 0; j < product.size() - 1; j += 6) {
+            productName.add(product.get(j));
+        }
+
+        ArrayList<String> manufacturer = new ArrayList<String>();
+        for (int j = 1; j < product.size() - 1; j += 6) {
+            manufacturer.add(product.get(j));
+        }
+
+        ArrayList<String> itemNum = new ArrayList<String>();
+        for (int j = 3; j < product.size() - 1; j += 6) {
+            itemNum.add(product.get(j));
+        }
+
+
+        for (int k = 0; k >= product.size()-1; k++ ) {
+            System.out.print(productName);
+            if (productName.get(k).equals(productName.get(k+1))) {
+                String args2 = String.valueOf(Integer.parseInt(itemNum.get(k)) + Integer.parseInt(itemNum.get(k+1)));
+                itemNum.add(k+1, args2);
+                itemNum.remove(k);
+                productName.remove(k);
+                manufacturer.remove(k);
+            }else{
+                k++;
+                System.out.print(itemNum);
+                System.out.println(k);
+            }
+        }
+
+
+        ObservableList<Product> products = FXCollections.observableArrayList();
 
         for (int i = 0; i <= product.size()- 1;i++) {
             if (!(product.get(i).equals("null"))) {
 
                 //product name
                 String arg1 = product.get(i);
-                System.out.println("This is arg0 "  + arg1);
                 i++;
                 //manufacturer
                 String arg2 = product.get(i);
-                System.out.println("This is arg1 "  + arg2);
                 i++;
                 //item type
                 String arg3 = product.get(i);
-                System.out.println("This is arg2 "  + arg3);
                 i++;
                 //item number
                 String arg4 = product.get(i);
-                System.out.println("This is arg3 "  + arg4);
                 i++;
                 //username
                 String arg5 = product.get(i);
-                System.out.println("This is arg4 "  + arg5);
                 i++;
                 //date
                 String arg6 = product.get(i);
-                System.out.println("This is arg5 "  + arg6);
-                trackingTable.setItems(getProducts(arg1, arg2, arg3, arg4, arg5, arg6));
+
+                //products.add(new Product(arg1, arg2, arg3, arg4, arg5, arg6));
+                    products.addAll(FXCollections.observableArrayList(
+                            new Product(arg1, arg2, arg3, arg4, arg5, arg6)));
+                }
+                trackingTable.setItems(products);
             }
         }
         }
-
-    public ObservableList<Product> getProducts(String arg1, String arg2, String arg3, String arg4, String arg5, String arg6) throws SQLException {
-        ObservableList<Product> products = FXCollections.observableArrayList();
-        //products.add(new Product(arg1, arg2, arg3, arg4, arg5, arg6));
-        products.addAll(FXCollections.observableArrayList(
-                new Product(arg1, arg2, arg3, arg4, arg5, arg6)));
-        return products;
-    }
-
-    }
